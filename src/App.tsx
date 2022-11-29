@@ -1,24 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import CardView from './components/CardView';
+import CardDeck from './lib/CardDeck';
+import Card from './lib/Card';
 
 function App() {
+  let [cards, setCards] = useState<Card[]>([]);
+
+  const dealCards = () => {
+    setCards(new CardDeck().getCards(5));
+  }
+
+  const button = <button onClick={dealCards}>Раздать карты</button>;
+
+  if (cards.length === 0) {
+    return (
+      <div>{button}</div>
+    )
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {button}
+      {cards.map((card: Card, index: number) => {
+        return (
+          <CardView rank={card.rank} suit={card.suit} key={index}/>
+        )
+      })}
     </div>
   );
 }
