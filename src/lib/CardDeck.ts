@@ -3,8 +3,8 @@ import Card from './Card';
 class CardDeck {
   cards: Card[] = [];
 
-  suits = ["hearts","spades","clubs","diams"];
-  ranks = ["A","2","3","4","5","6","7","8","9","10","J","Q","K"];
+  public suits = ["hearts","spades","clubs","diams"];
+  public ranks = ["A","2","3","4","5","6","7","8","9","10","J","Q","K"];
 
   constructor() {
     for(let suit = 0; suit < this.suits.length; suit++) {
@@ -19,20 +19,22 @@ class CardDeck {
   }
 
   getCard(): Card {
-    //проверить следующий код
     const randomCardIndex = Math.ceil(Math.random() * this.cards.length - 1);
-    this.cards.splice(randomCardIndex, 1);
     return this.cards[randomCardIndex];
   }
 
   getCards(howMany: number): Card[]{
-    const cardsArr: Card[] = [];
+    const cards: Card[] = [];
 
-    for (let i = 0; i < howMany; i++) {
-      cardsArr.push(this.getCard());
+    while (howMany !== 0) {
+      const card = this.getCard();
+      if(!cards.includes(card)) {
+        cards.push(card);
+        howMany--;
+      }
     }
 
-    return cardsArr;
+    return cards;
   }
 }
 

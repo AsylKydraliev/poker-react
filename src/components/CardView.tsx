@@ -32,10 +32,8 @@ const CardView: React.FC<Card> = props => {
       suitSymbol = '';
   }
 
-
-
   return (
-    <div className="playingCards faceImages">
+    <div className="playingCards faceImages card">
       <span className={cardClass}>
         <span className="rank">{props.rank}</span>
         <span className="suit">{suitSymbol}</span>
